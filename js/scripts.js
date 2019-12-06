@@ -159,7 +159,7 @@ var baseMaps = {
 };
 
 var overlayMaps = {
-	
+	"Modelo de Elevación Digital": demLayer;	
 };
 	
 control_capas = L.control.layers(baseMaps, overlayMaps).addTo(map);
