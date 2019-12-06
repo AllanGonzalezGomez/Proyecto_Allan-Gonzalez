@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Determinación de la infiltración en zona de recarga del acueducto de la ciudad de Liberia </title>   
+
+	<!-- Hoja de estilos CSS de Leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>	
+	<!-- Biblioteca JS de Leaflet -->
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>	
+	<!-- Complemento Leaflet-providers -->
+	<script src="js/leaflet-providers.js"></script>	
+	
+	<!-- Enlace a biblioteca JQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous">
+	</script>	
+	
+	<!-- Hoja de estilos CSS adicionales -->
+	<link rel="stylesheet" href="css/estilos.css"/>		
+	
+	<script src="js/choropleth.js"></script>
+
+	<!-- En HTML: enlace a Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+	integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+	crossorigin="anonymous" />	
+	
+</head>
+<body onload = "myFunction()"> 
+
+<h1> <center>Determinación de la infiltración utilizando el modelo analítico con base la lluvia mensual establecido por Schosinsky y Losilla</center></h1>
+
+<div class="row">
+		<div class="column_1">
+
+			<h2>Ciclo hidrológico</h2>
+			<p>El ciclo hidrológico corresponde a los cambios que experimenta el agua en la naturaleza, en su estado, sólidos, líquido y gaseoso y su forma, agua superficial, subterránea o atmosférica (Villón 2004).</p>
+
+			<center>
+				<img src="Ciclo_hidrologico.png" alt="Esquema gráfico de una cuenca hidrologica donde se diferencia el parte aguas" width="350" height="200">
+			</center>
+
+		</div>
+
+
+		<div class="column_2">
+		
+			<h2>La Cuenca Hidrográfica</h2>
+			<p>La cuenca hidrográfica es una superficie de terreno limitada por el contorno correspondiente a la mayor elevación, en la cual la precipitación caída sobre esta superficie drena (Cárdenas, 1998) en un cuerpo de agua superficial. Esto cuerpo de agua puede ser un río, quebrada o un yurro si tiene un carácter intermitente.</p> 
+
+			<center>
+			<img src="CuencaHidrologica.jpg" alt="Esquema gráfico de una cuenca hidrologica donde se diferencia el parte aguas" width="350" height="200" >
+			</center>
+	
+			<p>La cuenca hidrográfica tiene un punto final que corresponde al sitio donde el cuerpo de agua superficial descarga en otro cuerpo de agua superficial, sea este el mar, otro río o un lago. Este punto final se le denomina punto de control.</p>
+
+		</div>
+</div>
+
+
+<div class="row_2">
+
+
+<h2>Balance hídrico</h2>
+
+<h3>Zona de recarga</h3>
+<p>La adición de agua superficial a la zona de saturación se conoce como recarga. La recarga es parte del ciclo hidrológico es llamada como la recarga natural (Subramanya 2013). La porción de la precipitación que infiltra en el suelo y recarga la zona de saturación es un componente importante de la recarga natural.</p>
+<p>Unos de los objetivos de esta trabajo, es dejar una perspectiva clara del lector que la zona de recarga de una cuenca hidrológica la constituye otra el área de la cuenca y dejar de lado el criterio que las zonas de recarga son las partes altas del área de drenaje de la cuenca.</p>
+
+<h3>Determinación de la infiltración en el suelo</h3>
+<p>Para determinar la infiltración el modelo analítico con base la lluvia mensual establecido por Schosinsky y Losilla (2000), el cual se fundamenta en la distribución de la precipitación y la infiltración básica. El modelo separa la lluvia en escorrentía superficial e infiltración potencial.</p>
+<p>El modelo asigna a la escorrentía superficial, el valor del exceso de la intensidad de la lluvia, mayor que el valor de la infiltración básica. Además, los valores de la infiltración son ajustados por la pendiente de la topografía de la subcuenca, la cobertura vegetal y la interceptación de la lluvia por la cobertura.</p>
+
+<h4>Coeficiente de infiltración</h4>
+<p>El Manual de Estudios Hidrológicos (ONU, 1972), propuso para la ecuación 1 para determinar el coeficiente de infiltración aparente, el cual es una fracción de la lluvia que se infiltra en el suelo.</p>
+
+<p>C=K_p+K_v+K_fc</p>
+
+<p>Donde C coeficiente de infiltración total (unidimensional)</p>
+<p>Kp fracción que infiltración por efecto de la pendiente del terreno (unidimensional)</p>
+<p>Kv fracción que infiltra por efecto de la cobertura vegetal (unidimensional)</p>
+<p>Kfc fracción que infiltra por la textura del suelo (unidimensional)</p>
+
+<p>En el Cuadro N°1 se encuentran los coeficientes de infiltración propuestos por el modelo de Schosinsky y Losilla (2000), modificado del Manual de Estudios Hidrológicos (ONU, 1972), según las experiencias de campo realizadas por Ven Te Chow (1994).<br></p>
+
+<h3> <center>Visor de las subucuencas del proyecto "Determinación de la infiltración en zona de recarga del acueducto de la ciudad de Liberia"</center></h3>
+
+<div id="panel" style = "margin-left:0px; background-color:#D3D3D3;">
+					<label>Selecciona una de las subcuenca</label>
+					<select id="estilo" onchange="estiloSelect()">
+					  <option value="Chico Luis" >Chico Luis</option>
+					  <option value="Guitierrez">Guitiérrez</option>
+					  <option value="Martinez" >Martínez</option>
+					  <option value="Mora" >Mora</option>
+					  <option value="Pastor" >Pastor</option>
+					  <option value="Provision" >Provisión</option>
+					  <option value="Rancho Grande" >Rancho Grande</option>
+					  <option value="TODOS"  >Todos</option>
+					</select>
+		</div>
+		
+		
+	<!-- Elemento div para contener el mapa -->
+	
+	<center>
+	<div id="mapid"></div>	
+	</center>
+	
+	<!-- Código principal en JS -->
+	<script src="js/scripts.js"></script>
+</div>
+</body>
+</html>
